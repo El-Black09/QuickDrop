@@ -1,36 +1,68 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { COLORS, SPACING, TYPOGRAPHY } from '@/theme';
+import AppButton from "@/components/ui/AppButton";
+import AppCard from "@/components/ui/AppCard";
+import AppIconButton from "@/components/ui/AppIconButton";
+import AppText from "@/components/ui/AppText";
+import { COLORS, SPACING } from "@/theme";
+import { StyleSheet, View } from "react-native";
 
 export default function Index() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>QuickDrop</Text>
+      <AppText variant="h1" color={COLORS.primary}>
+        QuickDrop
+      </AppText>
 
-      <Text style={styles.subtitle}>
+      <AppText
+        variant="body"
+        color={COLORS.textSecondary}
+        style={styles.subtitle}
+      >
         Votre livraison, simplement.
-      </Text>
+      </AppText>
+
+      <AppCard style={styles.card}>
+        <AppText variant="h3">Livraison rapide</AppText>
+
+        <AppText color={COLORS.textSecondary} style={styles.cardText}>
+          Recevez vos commandes rapidement.
+        </AppText>
+      </AppCard>
+
+      <AppButton
+        title="Commander"
+        onPress={() => console.log("Commande")}
+        style={styles.button}
+      />
+
+      <AppIconButton icon="heart" onPress={() => console.log("Favori")} />
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
     justifyContent: "center",
+    alignItems: "center",
     backgroundColor: COLORS.background,
     padding: SPACING.lg,
   },
 
-  title: {
-    ...TYPOGRAPHY.h1,
-    color: COLORS.primary,
+  subtitle: {
+    marginTop: SPACING.sm,
   },
 
-  subtitle: {
-    ...TYPOGRAPHY.body,
-    color: COLORS.textSecondary,
+  card: {
+    width: "100%",
+    marginTop: SPACING.xl,
+  },
+
+  cardText: {
     marginTop: SPACING.sm,
+  },
+
+  button: {
+    width: "100%",
+    marginTop: SPACING.xl,
   },
 });

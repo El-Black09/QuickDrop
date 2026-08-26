@@ -2,3 +2,4 @@ export { COLORS } from './colors';
 export { SPACING } from './spacing';
 export { TYPOGRAPHY } from './typography';
 export { RADIUS } from './radius';
+export { SHADOWS } from './shadows';
