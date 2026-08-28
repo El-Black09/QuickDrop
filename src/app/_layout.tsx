@@ -12,6 +12,12 @@ export default function RootLayout() {
             headerShown: false,
           }}
         />
+        {/* <Stack.Screen
+          name="cart"
+          options={{
+            headerShown: false,
+          }}
+        /> */}
       </Stack>
     </CartProvider>
   );
