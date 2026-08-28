@@ -1,24 +1,17 @@
 import AppIconButton from "@/components/ui/AppIconButton";
 import AppText from "@/components/ui/AppText";
 import { COLORS, RADIUS, SHADOWS, SPACING } from "@/theme";
+import { Restaurant } from "@/types";
 import { Feather } from "@expo/vector-icons";
 import { Image, Pressable, StyleSheet, View } from "react-native";
 
 interface RestaurantCardProps {
-  name: string;
-  image: string;
-  rating: number;
-  deliveryTime: string;
-  category: string;
+  restaurant: Restaurant
   onPress: () => void;
 }
 
 export default function RestaurantCard({
-  name,
-  image,
-  rating,
-  deliveryTime,
-  category,
+  restaurant,
   onPress,
 }: RestaurantCardProps) {
   return (
@@ -27,7 +20,7 @@ export default function RestaurantCard({
       style={({ pressed }) => [styles.container, pressed && styles.pressed]}
     >
       <View style={styles.imageContainer}>
-        <Image source={{ uri: image }} style={styles.image} />
+        <Image source={{ uri: restaurant.image }} style={styles.image} />
 
         <View style={styles.favorite}>
           <AppIconButton
@@ -39,13 +32,13 @@ export default function RestaurantCard({
       </View>
 
       <View style={styles.content}>
-        <AppText variant="h3">{name}</AppText>
+        <AppText variant="h3">{restaurant.name}</AppText>
 
         <View style={styles.meta}>
           <Feather name="star" size={14} color={COLORS.warning} />
 
           <AppText variant="bodySmall" style={styles.rating}>
-            {rating}
+            {restaurant.rating}{" "}
           </AppText>
 
           <AppText variant="bodySmall" color={COLORS.textMuted}>
@@ -57,12 +50,12 @@ export default function RestaurantCard({
             color={COLORS.textSecondary}
             style={styles.time}
           >
-            {deliveryTime}
+            {restaurant.deliveryTime}
           </AppText>
         </View>
 
         <AppText variant="bodySmall" color={COLORS.textSecondary}>
-          {category}
+          {restaurant.category}
         </AppText>
       </View>
     </Pressable>

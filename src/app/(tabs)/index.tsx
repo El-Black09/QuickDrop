@@ -3,57 +3,11 @@ import HomeHeader from "@/components/home/HomeHeader";
 import RestaurantCard from "@/components/home/RestaurantCard";
 import SearchBar from "@/components/home/SearchBar";
 import AppText from "@/components/ui/AppText";
+import { categories, restaurants } from "@/data";
 import { COLORS, SPACING } from "@/theme";
 import { useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-
-const categories = [
-  {
-    id: "1",
-    name: "Burger",
-    image: require("@/assets/images/burger.png"),
-  },
-  {
-    id: "2",
-    name: "Pizza",
-    image: require("@/assets/images/pizza.png"),
-  },
-  {
-    id: "3",
-    name: "Poulet",
-    image: require("@/assets/images/chicken.png"),
-  },
-  {
-    id: "4",
-    name: "Healthy",
-    image: require("@/assets/images/salad.png"),
-  },
-  {
-    id: "5",
-    name: "Dessert",
-    image: require("@/assets/images/ice.png"),
-  },
-];
-
-const restaurants = [
-  {
-    id: "1",
-    name: "Burger House",
-    image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd",
-    rating: 4.8,
-    deliveryTime: "25-35 min",
-    category: "Poulet • Burgers",
-  },
-  {
-    id: "2",
-    name: "Pizza House",
-    image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002",
-    rating: 4.7,
-    deliveryTime: "20-30 min",
-    category: "Pizza • Italienne",
-  },
-];
 
 export default function Index() {
   const [search, setSearch] = useState("");
@@ -87,8 +41,7 @@ export default function Index() {
             {categories.map((category) => (
               <CategoryCard
                 key={category.id}
-                name={category.name}
-                image={category.image}
+                category={category}
                 onPress={() => {}}
               />
             ))}
@@ -108,8 +61,10 @@ export default function Index() {
             {restaurants.map((restaurant) => (
               <RestaurantCard
                 key={restaurant.id}
-                {...restaurant}
-                onPress={() => console.log(`Restaurant ${restaurant.name} pressed`)}
+                restaurant={restaurant}
+                onPress={() =>
+                  console.log(`Restaurant ${restaurant.name} pressed`)
+                }
               />
             ))}
           </View>
