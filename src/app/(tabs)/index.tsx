@@ -5,6 +5,7 @@ import SearchBar from "@/components/home/SearchBar";
 import AppText from "@/components/ui/AppText";
 import { categories, restaurants } from "@/data";
 import { COLORS, SPACING } from "@/theme";
+import { router } from "expo-router";
 import { useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -63,7 +64,10 @@ export default function Index() {
                 key={restaurant.id}
                 restaurant={restaurant}
                 onPress={() =>
-                  console.log(`Restaurant ${restaurant.name} pressed`)
+                  router.push({
+                    pathname: "/restaurant/[id]",
+                    params: { id: restaurant.id },
+                  })
                 }
               />
             ))}
