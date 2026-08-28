@@ -1,19 +1,15 @@
 import { COLORS, RADIUS, SPACING } from "@/theme";
+import { Category } from "@/types";
 import { Image } from "expo-image";
-import { ImageSourcePropType, Pressable, StyleSheet, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 import AppText from "../ui/AppText";
 
 interface CategoryCardProps {
-  name: string;
-  image: ImageSourcePropType;
+  category: Category;
   onPress: () => void;
 }
 
-export default function CategoryCard({
-  name,
-  image,
-  onPress,
-}: CategoryCardProps) {
+export default function CategoryCard({ category, onPress }: CategoryCardProps) {
   return (
     <View style={styles.wrapper}>
       <Pressable
@@ -21,7 +17,7 @@ export default function CategoryCard({
         onPress={onPress}
       >
         <Image
-          source={image}
+          source={category.image}
           style={styles.image}
           transition={200}
           contentFit="contain"
@@ -33,7 +29,7 @@ export default function CategoryCard({
         color={COLORS.textSecondary}
         style={styles.name}
       >
-        {name}
+        {category.name}
       </AppText>
     </View>
   );
