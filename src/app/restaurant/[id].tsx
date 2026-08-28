@@ -8,9 +8,11 @@ import { COLORS, SPACING } from "@/theme";
 import ProductCard from "@/components/restaurant/ProductCard";
 import RestaurantHeader from "@/components/restaurant/RestaurantHeader";
 import AppText from "@/components/ui/AppText";
+import { useCart } from "@/hooks/useCart";
 
 export default function RestaurantDetails() {
   const { id } = useLocalSearchParams<{ id: string }>();
+  const { addItem } = useCart();
 
   const restaurant = restaurants.find((item) => item.id === id);
 
@@ -61,7 +63,8 @@ export default function RestaurantDetails() {
             image={item.image}
             price={item.price}
             onPress={() => {
-              console.log("Produit sélectionné:", item.id);
+              addItem(item);
+              router.push("/cart");
             }}
           />
         </View>
