@@ -1,68 +1,149 @@
-import AppButton from "@/components/ui/AppButton";
-import AppCard from "@/components/ui/AppCard";
-import AppIconButton from "@/components/ui/AppIconButton";
+import CategoryCard from "@/components/home/CategoryCard";
+import HomeHeader from "@/components/home/HomeHeader";
+import RestaurantCard from "@/components/home/RestaurantCard";
+import SearchBar from "@/components/home/SearchBar";
 import AppText from "@/components/ui/AppText";
 import { COLORS, SPACING } from "@/theme";
-import { StyleSheet, View } from "react-native";
+import { useState } from "react";
+import { ScrollView, StyleSheet, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+
+const categories = [
+  {
+    id: "1",
+    name: "Burger",
+    image: require("@/assets/images/burger.png"),
+  },
+  {
+    id: "2",
+    name: "Pizza",
+    image: require("@/assets/images/pizza.png"),
+  },
+  {
+    id: "3",
+    name: "Poulet",
+    image: require("@/assets/images/chicken.png"),
+  },
+  {
+    id: "4",
+    name: "Healthy",
+    image: require("@/assets/images/salad.png"),
+  },
+  {
+    id: "5",
+    name: "Dessert",
+    image: require("@/assets/images/ice.png"),
+  },
+];
+
+const restaurants = [
+  {
+    id: "1",
+    name: "Burger House",
+    image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd",
+    rating: 4.8,
+    deliveryTime: "25-35 min",
+    category: "Poulet • Burgers",
+  },
+  {
+    id: "2",
+    name: "Pizza House",
+    image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002",
+    rating: 4.7,
+    deliveryTime: "20-30 min",
+    category: "Pizza • Italienne",
+  },
+];
 
 export default function Index() {
+  const [search, setSearch] = useState("");
+
   return (
-    <View style={styles.container}>
-      <AppText variant="h1" color={COLORS.primary}>
-        QuickDrop
-      </AppText>
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+        <HomeHeader
+          userName="Arnaud Igor"
+          address="Abidjan, Yopougon"
+          onNotificationPress={() => console.log("Notification pressed")}
+        />
 
-      <AppText
-        variant="body"
-        color={COLORS.textSecondary}
-        style={styles.subtitle}
-      >
-        Votre livraison, simplement.
-      </AppText>
+        <SearchBar value={search} onChangeText={setSearch} />
 
-      <AppCard style={styles.card}>
-        <AppText variant="h3">Livraison rapide</AppText>
+        <View style={styles.section}>
+          <View style={styles.sectionHeader}>
+            <AppText variant="h3">Catégories</AppText>
 
-        <AppText color={COLORS.textSecondary} style={styles.cardText}>
-          Recevez vos commandes rapidement.
-        </AppText>
-      </AppCard>
+            <AppText variant="bodySmall" color={COLORS.primary}>
+              Voir tout
+            </AppText>
+          </View>
 
-      <AppButton
-        title="Commander"
-        onPress={() => console.log("Commande")}
-        style={styles.button}
-      />
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.horizontalList}
+            style={{ marginHorizontal: 10 }}
+          >
+            {categories.map((category) => (
+              <CategoryCard
+                key={category.id}
+                name={category.name}
+                image={category.image}
+                onPress={() => {}}
+              />
+            ))}
+          </ScrollView>
+        </View>
 
-      <AppIconButton icon="heart" onPress={() => console.log("Favori")} />
-    </View>
+        <View style={[styles.section, { marginTop: 60 }]}>
+          <View style={styles.sectionHeader}>
+            <AppText variant="h3">Restaurants populaires</AppText>
+
+            <AppText variant="bodySmall" color={COLORS.primary}>
+              Voir tout
+            </AppText>
+          </View>
+
+          <View style={styles.restaurantList}>
+            {restaurants.map((restaurant) => (
+              <RestaurantCard
+                key={restaurant.id}
+                {...restaurant}
+                onPress={() => console.log(`Restaurant ${restaurant.name} pressed`)}
+              />
+            ))}
+          </View>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
     backgroundColor: COLORS.background,
-    padding: SPACING.lg,
   },
 
-  subtitle: {
-    marginTop: SPACING.sm,
+  section: {
+    marginTop: SPACING.xxl,
   },
 
-  card: {
-    width: "100%",
-    marginTop: SPACING.xl,
+  sectionHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: SPACING.lg,
+    marginBottom: SPACING.lg,
   },
 
-  cardText: {
-    marginTop: SPACING.sm,
+  horizontalList: {
+    paddingHorizontal: SPACING.lg,
+    gap: SPACING.md,
   },
 
-  button: {
-    width: "100%",
-    marginTop: SPACING.xl,
+  restaurantList: {
+    paddingHorizontal: SPACING.lg,
+    gap: SPACING.lg,
   },
 });
