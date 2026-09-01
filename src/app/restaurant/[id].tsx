@@ -62,10 +62,7 @@ export default function RestaurantDetails() {
             description={item.description}
             image={item.image}
             price={item.price}
-            onPress={() => {
-              addItem(item);
-              router.push("/cart");
-            }}
+            onPress={() => {addItem(item); router.push("/(tabs)/cart")}}
           />
         </View>
       )}

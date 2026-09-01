@@ -1,8 +1,11 @@
+import { useCart } from "@/hooks/useCart";
 import { COLORS } from "@/theme";
 import { Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 
 export default function TabsLayout() {
+  const { itemCount } = useCart();
+
   return (
     <Tabs
       screenOptions={{
@@ -46,6 +49,22 @@ export default function TabsLayout() {
               color={color}
               size={size}
             />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="cart"
+        options={{
+          title: "Panier",
+          tabBarBadge: itemCount > 0 ? itemCount : undefined,
+          tabBarBadgeStyle: {
+            backgroundColor: COLORS.primary,
+            color: COLORS.white,
+            marginTop: -2,
+            marginRight: -5,
+          },
+          tabBarIcon: ({ color, size, focused }) => (
+            <Ionicons name={"cart-outline"} color={color} size={size} />
           ),
         }}
       />
